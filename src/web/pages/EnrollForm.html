@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Bienvenido a Remo &amp; Regatas</title>
+</head>
+
+<body>
+  <h2>Remo &amp; Regatas</h2>
+  <h3>Registro de usuario nuevo</h3>
+  <form action="/Rowing/authorization/enroll" method="post">
+    <table>
+      <tr>
+        <td><label for="name">Nombre</label></td>
+        <td><input name="name" type="text" required/></td>
+      </tr>
+      <tr>
+        <td><label for="lastName">Apellido</label></td>
+        <td><input name="lastName" type="text" required/></td>
+      </tr>
+      <tr>
+        <td><label for="email">e-mail</label></td>
+        <td><input name="email" type="email" required/></td>
+      </tr>
+      <tr>
+        <td><label for="phoneNumber">Teléfono</label></td>
+        <td><input name="phoneNumber" type="text"/></td>
+      </tr>
+      <tr>
+        <td><label for="password">Password</label></td>
+        <td><input name="password" type="password" required/></td>
+      </tr>
+      <tr>
+        <td><label for="password2">Verify Password</label></td>
+        <td><input name="password2" type="password" required/></td>
+      </tr>
+      <tr>
+      <td><button type="submit">Submit</button></td>
+      </tr>
+    </table>
+  </form>
+</body>
+
+</html>

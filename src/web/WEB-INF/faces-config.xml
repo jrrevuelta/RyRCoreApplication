@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+                        http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd"
+    version="2.3">
+
+  <application>
+  
+    <message-bundle>resources.application</message-bundle>
+    <resource-bundle>
+      <base-name>resources.application</base-name>
+      <var>msg</var>
+    </resource-bundle>
+    <locale-config>
+      <default-locale>es</default-locale>
+      <supported-locale>en</supported-locale>
+    </locale-config>
+    
+  </application>
+  
+  <navigation-rule>
+    <from-view-id>*</from-view-id>
+    <navigation-case>
+      <from-outcome>login</from-outcome>
+      <to-view-id>/access/login.xhtml</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+
+  <navigation-rule>
+    <from-view-id>*</from-view-id>
+    <navigation-case>
+      <from-outcome>signup</from-outcome>
+      <to-view-id>/access/signup.xhtml</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+
+  <navigation-rule>
+    <from-view-id>*</from-view-id>
+    <navigation-case>
+      <from-outcome>main</from-outcome>
+      <to-view-id>/pages/main.xhtml</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+
+</faces-config>

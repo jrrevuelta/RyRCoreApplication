@@ -1,0 +1,8 @@
+.DS_Store
+.classpath
+.project
+/.metadata/
+/.settings/
+/build/
+/dist/
+/src/web/WEB-INF/lib/

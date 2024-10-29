@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<regatta id="1">
+
+	<name>LXXXV Campeonatos Nacionales de Remo, 2019</name>
+	<displayName>Campeonatos Nacionales 2019</displayName>
+	<startDate>2019-04-18</startDate>
+	<endDate>2019-04-21</endDate>
+	<locationId>1</locationId>
+	<locationName>Pista Olímpica de Remo y Canotaje: "Virgilio Uribe"</locationName>
+	<status>FINALIZED</status>
+	
+		<event id="1">
+			<category id="U17">Sub 17</category>
+			<gender id="W">Mujeres</gender>
+			<boat id="4+">Cuatro con timonel</boat>
+			<idfr>U17 W4+</idfr>
+			<distance>1500</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="2">
+			<category id="PR1">Para-Remo 1</category>
+			<gender id="1">Hombres</gender>
+			<boat id="1x">Single</boat>
+			<idfr>PR1 M1x</idfr>
+			<distance>2000</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="3">
+			<category id="U13">Sub 13</category>
+			<gender id="W">Mujeres</gender>
+			<boat id="2x">Doble</boat>
+			<idfr>U13 W2x</idfr>
+			<distance>500</distance>
+			<status>DESERTED</status>
+		</event>
+		<event id="4">
+			<category id="U17">Sub 17</category>
+			<gender id="M">Hombres</gender>
+			<boat id="1x">Single</boat>
+			<idfr>U17 M1x</idfr>
+			<distance>1500</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="5">
+			<category id="PR3">Para-Remo 3</category>
+			<gender id="Mix">Mixto</gender>
+			<boat id="4+">Cuatro con timonel</boat>
+			<idfr>PR3 Mix4+</idfr>
+			<distance>2000</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="6">
+			<category id="U23">Sub 23</category>
+			<gender id="M">Hombres</gender>
+			<boat id="2-">Dos sin timonel</boat>
+			<idfr>U23 M2-</idfr>
+			<distance>2000</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="7">
+			<category id=" ">Abierto</category>
+			<gender id="W">Mujeres</gender>
+			<boat id="2x">Doble</boat>
+			<idfr>W2x</idfr>
+			<distance>2000</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="8">
+			<category id="U15">Sub 15</category>
+			<gender id="W">Mujeres</gender>
+			<boat id="1x">Single</boat>
+			<idfr>U15 W1x</idfr>
+			<distance>1000</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="9">
+			<category id="U19">Sub 19</category>
+			<gender id="M">Hombres</gender>
+			<boat id="2x">Doble</boat>
+			<idfr>U19 M2x</idfr>
+			<distance>2000</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="10">
+			<category id="U19">Sub 19</category>
+			<gender id="W">Mujeres</gender>
+			<boat id="1x">Single</boat>
+			<idfr>U19 W1x</idfr>
+			<distance>2000</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="11">
+			<category id=" ">Abierto</category>
+			<gender id="M">Hombres</gender>
+			<boat id="2-">Dos sin timonel</boat>
+			<idfr>M2-</idfr>
+			<distance>2000</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="12">
+			<category id="U17">Sub 17</category>
+			<gender id="M">Hombres</gender>
+			<boat id="4x">Cuádruple</boat>
+			<idfr>U17 M4x</idfr>
+			<distance>1500</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="13">
+			<category id="MS">Master</category>
+			<gender id="W">Mujeres</gender>
+			<boat id="1x">Single</boat>
+			<idfr>MS W1x</idfr>
+			<distance>1000</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="14">
+			<category id="U23">Sub 23</category>
+			<gender id="W">Mujeres</gender>
+			<boat id="2x">Doble</boat>
+			<idfr>U23 W2x</idfr>
+			<distance>2000</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="15">
+			<category id="U23">Sub 23</category>
+			<gender id="M">Hombres</gender>
+			<boat id="1x">Single</boat>
+			<idfr>U23 M1x</idfr>
+			<distance>2000</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="16">
+			<category id="U19">Sub 19</category>
+			<gender id="M">Hombres</gender>
+			<boat id="4x">Cuádruple</boat>
+			<idfr>U19 M4x</idfr>
+			<distance>2000</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="18">
+			<category id="U19">Sub 19</category>
+			<gender id="W">Mujeres</gender>
+			<boat id="2-">Dos sin timonel</boat>
+			<idfr>U19 W2-</idfr>
+			<distance>2000</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="19">
+			<category id="L">Ligero</category>
+			<gender id="M">Hombres</gender>
+			<boat id="1x">Single</boat>
+			<idfr>L M1x</idfr>
+			<distance>2000</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="20">
+			<category id="U17">Sub17</category>
+			<gender id="W">Mujeres</gender>
+			<boat id="2x">Doble</boat>
+			<idfr>U17 W2x</idfr>
+			<distance>1500</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="21">
+			<category id="U17">Sub 17</category>
+			<gender id="M">Hombres</gender>
+			<boat id="4+">Cuatro con timonel</boat>
+			<idfr>U17 M4+</idfr>
+			<distance>1500</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="22">
+			<category id="MS">Master</category>
+			<gender id="M">Hombres</gender>
+			<boat id="2x">Doble</boat>
+			<idfr>MS M2x</idfr>
+			<distance>1000</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="23">
+			<category id="U15">Sub 15</category>
+			<gender id="W">Mujeres</gender>
+			<boat id="4x">Cuádruple</boat>
+			<idfr>U15 W4x</idfr>
+			<distance>1000</distance>
+			<status>DESERTED</status>
+		</event>
+		<event id="24">
+			<category id="U15">Sub 15</category>
+			<gender id="M">Hombres</gender>
+			<boat id="2x">Doble</boat>
+			<idfr>U15 M2x</idfr>
+			<distance>1000</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="25">
+			<category id="U19">Sub 19</category>
+			<gender id="W">Mujeres</gender>
+			<boat id="4x">Cuádruple</boat>
+			<idfr>U19 W4x</idfr>
+			<distance>2000</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="26">
+			<category id=" ">Abierto</category>
+			<gender id="W">Mujeres</gender>
+			<boat id="1x">Single</boat>
+			<idfr>W1x</idfr>
+			<distance>2000</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="27">
+			<category id="U23">Sub 23</category>
+			<gender id="W">Mujeres</gender>
+			<boat id="4x">Cuádruple</boat>
+			<idfr>U23 W4x</idfr>
+			<distance>2000</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="28">
+			<category id="Prin">Principiante</category>
+			<gender id="M">Hombres</gender>
+			<boat id="2x">Doble</boat>
+			<idfr>Prin M2x</idfr>
+			<distance>1500</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="29">
+			<category id="Prin">Principante</category>
+			<gender id="W">Mujeres</gender>
+			<boat id="1x">Single</boat>
+			<idfr>Prin W1x</idfr>
+			<distance>1500</distance>
+			<status>FINALIZED</status>
+		</event>
+		<event id="30">
+			<category id="U13">Sub 13</category>
+			<gender id="Mix">Mixto</gender>
+			<boat id="4x">Cuádruple</boat>
+			<idfr>U13 Mix4x</idfr>
+			<distance>500</distance>
+			<status>DESERTED</status>
+		</event>
+		<event id="31">
+			<category id="U19">Sub 19</category>
+			<gender id="Mix">Mixto</gender>
+			<boat id="8+">Ocho con timonel</boat>
+			<idfr>U19 Mix8+</idfr>
+			<distance>2000</distance>
+			<status>FINALIZED</status>
+		</event>
+
+  <races>
+    <race id="1">
+        <event id="1">
+            <boat idfr="1x">Single</boat>
+            <category idfr="U15 ">Sub 15</category>
+            <distance>1000</distance>
+            <gender idfr="M">Hombres</gender>
+            <idfr>U15 M1x</idfr>
+            <status>PROGRAMMED</status>
+        </event>
+        <progression>F1</progression>
+        <raceNumber>1</raceNumber>
+        <startTime>2019-09-28T09:00:00Z</startTime>
+        <status>PROGRAMMED</status>
+        <crews>
+          <racecrew>
+            <lane>3</lane>
+            <crew id="1">
+              <displayName>Club España C</displayName>
+              <combined>false</combined>
+              <rowers>
+                <rower>
+                  <name>Rodrigo</name>
+                  <lastnameP>Revuelta</lastnameP>
+                </rower>
+              </rowers>
+              <status>REGISTERED</status>
+            </crew>
+          </racecrew>
+          <racecrew>
+            <lane>4</lane>
+            <crew id="2">
+              <displayName>Canauhtli</displayName>
+              <combined>false</combined>
+              <rowers>
+                <rower>
+                  <name>Eduardo</name>
+                  <lastnameP>Galicia</lastnameP>
+                </rower>
+              </rowers>
+              <status>REGISTERED</status>
+            </crew>
+          </racecrew>
+          <racecrew>
+            <lane>5</lane>
+            <crew id="3">
+              <displayName>Lakeside A</displayName>
+              <combined>false</combined>
+              <rowers>
+                <rower>
+                  <name>Luis S.</name>
+                  <lastnameP>Trejo</lastnameP>
+                  <lastnameM>Medina</lastnameM>
+                </rower>
+              </rowers>
+              <status>REGISTERED</status>
+            </crew>
+          </racecrew>
+          <racecrew>
+            <lane>6</lane>
+            <crew id="4">
+              <displayName>Club España B</displayName>
+              <combined>false</combined>
+              <rowers>
+                <rower>
+                  <name>José Emilio</name>
+                  <lastnameP>Sánchez</lastnameP>
+                </rower>
+              </rowers>
+              <status>REGISTERED</status>
+            </crew>
+          </racecrew>
+        </crews>
+    </race>
+    <race id="41">
+        <event id="1">
+            <boat idfr="1x">Single</boat>
+            <category idfr="U15 ">Sub 15</category>
+            <distance>1000</distance>
+            <gender idfr="M">Hombres</gender>
+            <idfr>U15 M1x</idfr>
+            <status>PROGRAMMED</status>
+        </event>
+        <progression>F2</progression>
+        <raceNumber>1</raceNumber>
+        <startTime>2019-09-28T09:12:00Z</startTime>
+        <status>PROGRAMMED</status>
+    </race>
+  </races>
+
+
+
+</regatta>
+
+<!-- 
+Botes:
+1  1x  Single
+2  2x  Doble
+3  4x  Cuádruple
+4  2-  Par
+5  2+  Dos con timonel
+6  4-  Cuatro
+7  4+  Cuatro con timonel
+8  8+  Ocho
+
+Categorías:
+ 1          Abierto
+ 2  L       Ligero
+ 3  Prin    Principiante
+ 4  Prin L  Principiante Ligero
+ 5  MS      Master 
+ 6  U23     Sub 23
+15  U23 L   Sub 23 Ligero
+ 7  U19     Sub 19
+ 8  U17     Sub 17
+ 9  U15     Sub 15
+10  U13     Sub 13
+16  PR1     Para-Remo 1
+17  PR2     Para-Remo 2
+18  PR3     Para-Remo 3
+11  IB      Infantil B
+12  IA      Infantil A
+13  JB      Juvenil B
+14  JA      Juvenil A 
+
+Genero:
+1  M    Hombres
+2  W    Mujeres
+3  Mix  Mixto
+-->

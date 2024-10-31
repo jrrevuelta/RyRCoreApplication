@@ -5,12 +5,12 @@
   <!--  DataSource deployment configuration  -->
   <!--  Targets:
   				Local     ===>  
-  				                jdbcUrl=jdbc:mysql://localhost:3306/RRDB?serverTimezone=Europe/Madrid
+  				                jdbcUrl=jdbc:mysql://localhost:3306/RRDB?serverTimezone=UTC
   				                userName=rr
   				                password=remo
   				                
   				AWS-dev   ===>  
-  				                jdbcUrl=jdbc:mysql://localhost:3306/RRDB?serverTimezone=Europe/Madrid
+  				                jdbcUrl=jdbc:mysql://localhost:3306/RRDB?serverTimezone=UTC
   				                userName=rr
   				                password=n5wg43k3kh4wh1giu8e
   				                
@@ -38,19 +38,23 @@
   </Resource>
   
   
-  <!--  AWS SES deployment configuration  -->
-  <!--  To be provided by AWS SES:
-  				SES configuration in N.Virginia (region US-EAST-1).
-  				jrr-rrsvc-dev/AKIA2F5P2JEUOV3A6X2L/sDrLfKh67BWFba2AHzbcmKsY+lb7oCNr9JvjX9M3
-  				IAM UserId: Dev R&R Service (jrr-rrsvc-dev). User with SES full access profile, for development purposes only.
+  <!--  AWS services deployment configuration  -->
+  <!--  
+        To be provided by AWS IAM:
+          
+          UserName: jrr-ryr-prod
+          Region: EU-SOUTH-2
+          AccessKey: /AKIA2F5P2JEUOV3A6X2L/sDrLfKh67BWFba2AHzbcmKsY+lb7oCNr9JvjX9M3/
+
+          Application user with permissions to access: SES, SNS, KMS
   -->
   <Resource
       id="aws-ses/RR-SimpleEmailService"
       class-name="org.jrrevuelta.rr.service.config.AwsSesClientConfig">
-    iamUserName=jrr-rrsvc-dev
-    iamUserAccessKeyId=
-    iamUserSecretAccessKey=
-    awsRegion=us-east-1
+    iamUserName=jrr-ryr-prod
+    iamUserAccessKeyId=[[SECRET]]
+    iamUserSecretAccessKey=[[SECRET]]
+    awsRegion=EU-SOUTH-2
   </Resource>
 
 </resources>

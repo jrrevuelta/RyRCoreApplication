@@ -1,8 +1,14 @@
 # Remo y Regatas
 
-## Aplicación central (web)
+Remo y Regatas informa de los eventos de las regatas de remo de una forma simple y amigable, y de fácil mantenimiento para los gestionadores (jueces, delegados, etc)
 
-## Servicios web de soporte para aplicaciones móviles
+Se compone de Servicios core y Aplicación web y móvil.
+
+## Servicios core
+
+## Aplicación central en-linea (web)
+
+## Servicios web en-linea de soporte para aplicaciones móviles
 
 
 Este componente central (core) implementa:

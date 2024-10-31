@@ -9,24 +9,24 @@
 	<persistence-unit name="RR-service" transaction-type="JTA">
 	
 		<jta-data-source>jdbc/RRDS</jta-data-source>
-		<class>org.jrrevuelta.rr.service.model.Regatta</class>
-		<class>org.jrrevuelta.rr.service.model.Event</class>
-		<class>org.jrrevuelta.rr.service.model.Race</class>
-		<class>org.jrrevuelta.rr.service.model.RaceCrew</class>
+		<class>org.jrrevuelta.rr.model.Regatta</class>
+		<class>org.jrrevuelta.rr.model.Event</class>
+		<class>org.jrrevuelta.rr.model.Race</class>
+		<class>org.jrrevuelta.rr.model.RaceCrew</class>
 
-		<class>org.jrrevuelta.rr.service.model.Team</class>
-		<class>org.jrrevuelta.rr.service.model.Rower</class>
-		<class>org.jrrevuelta.rr.service.model.Crew</class>
-		<class>org.jrrevuelta.rr.service.model.CrewRower</class>
+		<class>org.jrrevuelta.rr.model.Team</class>
+		<class>org.jrrevuelta.rr.model.Rower</class>
+		<class>org.jrrevuelta.rr.model.Crew</class>
+		<class>org.jrrevuelta.rr.model.CrewRower</class>
 
-		<class>org.jrrevuelta.rr.service.model.VenueCatalog</class>
-		<class>org.jrrevuelta.rr.service.model.CategoryCatalog</class>
-		<class>org.jrrevuelta.rr.service.model.GenderCatalog</class>
-		<class>org.jrrevuelta.rr.service.model.BoatCatalog</class>
+		<class>org.jrrevuelta.rr.model.VenueCatalog</class>
+		<class>org.jrrevuelta.rr.model.CategoryCatalog</class>
+		<class>org.jrrevuelta.rr.model.GenderCatalog</class>
+		<class>org.jrrevuelta.rr.model.BoatCatalog</class>
 
-		<class>org.jrrevuelta.rr.service.model.User</class>
-		<class>org.jrrevuelta.rr.service.model.Invitation</class>
-		<class>org.jrrevuelta.rr.service.model.BearerToken</class>
+		<class>org.jrrevuelta.rr.model.User</class>
+		<class>org.jrrevuelta.rr.model.Invitation</class>
+		<class>org.jrrevuelta.rr.model.BearerToken</class>
 		
 	</persistence-unit>
 	

@@ -16,8 +16,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
+import org.jrrevuelta.rr.aws.AwsClientConfig;
 import org.jrrevuelta.rr.aws.AwsSesSendEmail;
-import org.jrrevuelta.rr.config.AwsSesClientConfig;
 import org.jrrevuelta.rr.model.BearerToken;
 import org.jrrevuelta.rr.model.Invitation;
 import org.jrrevuelta.rr.model.User;
@@ -38,12 +38,11 @@ import org.jrrevuelta.security.passwords.SecuredPasswordVerifier;
 public class AuthorizationManagerBean implements AuthorizationManager {
 
 	@PersistenceContext(name="RR-service") EntityManager em;
-	@Resource(name="aws-ses/RR-SimpleEmailService", 
-			  type=org.jrrevuelta.rr.config.AwsSesClientConfig.class)
-		private AwsSesClientConfig sesContext;
+	@Resource(name="aws/RR-CloudServices", type=org.jrrevuelta.rr.aws.AwsClientConfig.class)
+		private AwsClientConfig sesContext;
 	private SecureRandom random = new SecureRandom();
 	
-	private static Logger log = Logger.getLogger("org.jrrevuelta.rr.service.ejb");
+	private static Logger log = Logger.getLogger("org.jrrevuelta.rr.ejb");
 	
 	
 	public AuthorizationManagerBean() {

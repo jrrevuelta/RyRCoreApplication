@@ -1,15 +1,19 @@
-package org.jrrevuelta.rr.config;
+package org.jrrevuelta.rr.aws;
 
-public class AwsSesClientConfig {
+public class AwsClientConfig {
 	
 	// IAM userid credentials
 	private String iamUserName;
 	private String iamUserAccessKeyId;
 	private String iamUserSecretAccessKey;
 	private String awsRegion;
+	// SES
+	// SNS
+	// KMS
+	private String kmsKeyId;
 	
 	
-	public AwsSesClientConfig() {
+	public AwsClientConfig() {
 		super();
 	}
 	
@@ -25,5 +29,8 @@ public class AwsSesClientConfig {
 	
 	public String getAwsRegion() { return awsRegion; }
 	public void setAwsRegion(String awsRegion) { this.awsRegion = awsRegion; }
+	
+	public String getKmsKeyId() { return kmsKeyId; }
+	public void setKmsKeyId(String kmsKeyId) { this.kmsKeyId = kmsKeyId; }
 	
 }

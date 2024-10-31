@@ -47,14 +47,16 @@
           AccessKey: /AKIA2F5P2JEUOV3A6X2L/sDrLfKh67BWFba2AHzbcmKsY+lb7oCNr9JvjX9M3/
 
           Application user with permissions to access: SES, SNS, KMS
+            
   -->
   <Resource
-      id="aws-ses/RR-SimpleEmailService"
-      class-name="org.jrrevuelta.rr.service.config.AwsSesClientConfig">
+      id="aws/RR-CloudServices"
+      class-name="org.jrrevuelta.rr.aws.AwsClientConfig">
     iamUserName=jrr-ryr-prod
     iamUserAccessKeyId=[[SECRET]]
     iamUserSecretAccessKey=[[SECRET]]
     awsRegion=EU-SOUTH-2
+    kmsKeyId=[PENDING]
   </Resource>
 
 </resources>

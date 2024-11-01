@@ -34,7 +34,7 @@ public interface AuthorizationResource {
 	 * name and lastname in advance in "mailto:" format.<br/>
 	 * e.g. Revuelta Lazcano, José Ramón &lt;j.r.revuelta@computer.org&gt;<br/>
 	 * <br/>
-	 * While provisioning the invitation, the role MAY be established (ROWER, COACH, DELEGATE, 
+	 * While provisioning the invitation, the role MAY be proposed (ROWER, COACH, DELEGATE, 
 	 * JUDGE, ADMIN). If no role is authorized, the ROWER status is given.
 	 * <br/>
 	 * The e-mail is directly sent to the invitee with an appropriate text and a link to the

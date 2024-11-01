@@ -10,6 +10,7 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 import org.jrrevuelta.rr.ejb.AuthorizationManager;
 import org.jrrevuelta.rr.model.BearerToken;
 import org.jrrevuelta.rr.model.Invitation;
+//import org.jrrevuelta.rr.model.Role;
 import org.jrrevuelta.rr.model.User;
 
 /** 
@@ -40,12 +41,14 @@ public class AuthorizationResourceService implements AuthorizationResource {
 		
 		// Check Authorization
 		User authority = authorizationManager.verifyToken(authorization);
-		if (!authority.getRole().toString().matches("ADMIN|JUDGE|DELEGATE|COACH")) { 
+/*		
+		// Verify it is a valid user (role) to send the invite
+		if (!authority.getRoles().stream().map(Role.Roles.valueOf()).anyMatch(Role::Roles)) {   // TODO Use of stream to validate!! -> Think! 
 			builder = Response.status(Response.Status.FORBIDDEN);
 			builder.type(MediaType.TEXT_PLAIN_TYPE);
 			builder.entity("User not allowed to issue an invitation.");
 		}
-		
+*/		
 		try {
 			Invitation invitation = authorizationManager.invite(subject, role, authority);
 			builder = Response.ok(invitation);
@@ -79,7 +82,7 @@ public class AuthorizationResourceService implements AuthorizationResource {
 		try {
 			Invitation invitation = authorizationManager.getInvitation(invitationIdfr);
 			
-			if (invitation.getStatus().equals(Invitation.InvitationLifeCycleStatus.CREATED)) {
+			if (invitation.getStatus().equals(Invitation.Status.CREATED)) {
 				// TODO: Depending on the status of the invite, create the appropriate HTML (no invite, expired, used, normal)
 			}
 			
@@ -100,7 +103,7 @@ public class AuthorizationResourceService implements AuthorizationResource {
 					+ "        </tr>"
 					+ "        <tr>"
 					+ "          <td><label for=\"lastName\">Apellido</label></td>"
-					+ "          <td><input name=\"lastName\" type=\"text\"" + (invitation.getLastName() != null ? " value=\"" + invitation.getLastName() + "\"" : "") + " required/></td>"
+					+ "          <td><input name=\"lastName\" type=\"text\"" + (invitation.getLastname() != null ? " value=\"" + invitation.getLastname() + "\"" : "") + " required/></td>"
 					+ "        </tr>"
 					+ "        <tr>"
 					+ "          <td><label for=\"email\">e-mail</label></td>"

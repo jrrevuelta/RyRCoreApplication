@@ -4,6 +4,8 @@ import java.math.BigInteger;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.security.SecureRandom;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Date;
 import java.util.logging.Logger;
 
@@ -16,18 +18,16 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
+import org.apache.catalina.CredentialHandler;
 import org.jrrevuelta.rr.aws.AwsClientConfig;
 import org.jrrevuelta.rr.aws.AwsSesSendEmail;
 import org.jrrevuelta.rr.model.BearerToken;
-import org.jrrevuelta.rr.model.Invitation;
-import org.jrrevuelta.rr.model.User;
-import org.jrrevuelta.rr.model.UserRole;
 import org.jrrevuelta.rr.model.BearerToken.TokenLifeCycleStatus;
 import org.jrrevuelta.rr.model.BearerToken.TokenType;
-import org.jrrevuelta.rr.model.Invitation.InvitationLifeCycleStatus;
-import org.jrrevuelta.security.passwords.SecuredPassword;
-import org.jrrevuelta.security.passwords.SecuredPasswordGenerator;
-import org.jrrevuelta.security.passwords.SecuredPasswordVerifier;
+import org.jrrevuelta.rr.model.Invitation;
+import org.jrrevuelta.rr.model.Role;
+import org.jrrevuelta.rr.model.User;
+import org.jrrevuelta.security.passwords.JrrCredentialHandler;
 
 
 /**
@@ -56,33 +56,6 @@ public class AuthorizationManagerBean implements AuthorizationManager {
 	/////////////////////////////////////////////////////
 	
 	@Override
-	public User createUser(User user, String invitationIdfr, String password) {
-		log.fine("RR: Creating user [" + user.getIdfr() + ": " + user.getLastName() + ", " + user.getName() + "]");
-		
-		// TODO: Validate user's fields (should all be set correctly from calling method)
-		
-		// Validate invitation (assign role from invitation)
-		Invitation invitation = getInvitation(invitationIdfr);   // TODO: Consider situations with the invitation status
-		user.setRole(invitation.getRole());
-		
-		// Generate password's derived key to keep in DB
-		SecuredPasswordGenerator generator = new SecuredPasswordGenerator();
-		SecuredPassword securedPassword = generator.generateNewSecuredPassword(password);
-		user.setPassword(securedPassword.getDerivedKey());
-		user.setSalt(securedPassword.getSalt());
-		user.setCounter(securedPassword.getCounter());
-		
-		// Create user in DB
-		user.setStatus(User.UserLifeCycleStatus.ACTIVE);
-		user.setTimestamp(new Date());
-		em.persist(user);
-		log.fine("RR: User #" + user.getId() + " created [" + user.getIdfr() + "]");
-		
-		return user;
-	}
-	
-
-	@Override
 	public User getUser(String idfr) {
 		log.fine("RR: Getting User [" + idfr + "]");
 		
@@ -107,10 +80,65 @@ public class AuthorizationManagerBean implements AuthorizationManager {
 		return user;
 	}
 	
+
+	@Override
+	public User createUser(User user, String invitationIdfr, String password) {
+		log.fine("RR: Creating user [" + user.getIdfr() + ": " + user.getLastName() + ", " + user.getName() + "]");
+		
+		// TODO: Validate user's fields (should all be set correctly from calling method)
+		
+		// Validate invitation (assign role from invitation)
+		Invitation invitation = getInvitation(invitationIdfr);
+		Role role = new Role();
+		role.setIdfr(user.getIdfr());
+		role.setRole(invitation.getRole());
+		role.setUser(user);
+		user.getRoles().add(role);
+		
+		// Generate password's derived key to keep in DB
+		CredentialHandler credentialHandler = new JrrCredentialHandler();
+		user.setPassword(credentialHandler.mutate(user.getPassword()));
+		
+		// Create user in DB
+		user.setStatus(User.Status.ACTIVE);
+		user.setTimestamp(Timestamp.from(Instant.now()));
+		em.persist(user);
+		em.persist(role);
+		log.fine("RR: User #" + user.getId() + " created [" + user.getIdfr() + "]");
+		
+		return user;
+	}
+	
 	
 	/////////////////////////////////////////////////////
 	//// === Enrollment Functionality  ============= ////
 	/////////////////////////////////////////////////////
+	
+	@Override
+	public Invitation getInvitation(String idfr) {
+		log.fine("RR: Getting Invitation [" + idfr + "]");
+		
+		Invitation invitation = null;
+		
+		try {
+			TypedQuery<Invitation> q = em.createNamedQuery("Invitation.withIDFR", Invitation.class);
+			q.setParameter("idfr", idfr);
+			invitation = q.getSingleResult();
+			log.fine("RR: Invitation found [" + invitation.getIdfr() + "]");
+		} catch (NoResultException e) {
+			log.fine("RR: EJB Invitation not found [" + idfr + "].");
+			//throw new RecordNotFoundException("Invitation not found: [" + idfr + "]");
+		} catch (NonUniqueResultException e) {
+			log.warning("RR: EJB More than one Invitation found with IDFR: [" + idfr + "].");
+			//throw new RecordErrorException("More than one Invitation found with IDFR: [" + idfr + "]");
+		} catch (PersistenceException e) {
+			log.warning("RR: EJB Persistence error while getting Invitation [" + idfr + "].");
+			//throw new SystemErrorException("Persistence error while getting Invitation [" + idfr + "].");
+		}
+		
+		return invitation;
+	}
+	
 	
 	@Override
 	public Invitation invite(String subject, String role, User authority) {
@@ -126,13 +154,13 @@ public class AuthorizationManagerBean implements AuthorizationManager {
 		
 		// Validate and set the role. in case of error, then use ROWER role...  TODO: Validate which authority can invite which role...
 		if (role.toUpperCase().matches("ADMIN|JUDGE|DELEGATE|COACH|ROWER")) {
-			invitation.setRole(UserRole.valueOf(role.toUpperCase()));
+			invitation.setRole(Role.Roles.valueOf(role.toUpperCase()));
 		} else {
-			invitation.setRole(UserRole.ROWER);
+			invitation.setRole(Role.Roles.ROWER);
 		}
 		
-		invitation.setStatus(InvitationLifeCycleStatus.CREATED);
-		invitation.setTimestamp(new Date());
+		invitation.setStatus(Invitation.Status.CREATED);
+		invitation.setTimestamp(Timestamp.from(Instant.now()));
 		
 		// Use AWS to actually send the email
 		try {
@@ -164,65 +192,10 @@ public class AuthorizationManagerBean implements AuthorizationManager {
 	}
 	
 	
-	@Override
-	public Invitation getInvitation(String idfr) {
-		log.fine("RR: Getting Invitation [" + idfr + "]");
-		
-		Invitation invitation = null;
-		
-		try {
-			TypedQuery<Invitation> q = em.createNamedQuery("Invitation.withIDFR", Invitation.class);
-			q.setParameter("idfr", idfr);
-			invitation = q.getSingleResult();
-			log.fine("RR: Invitation found [" + invitation.getIdfr() + "]");
-		} catch (NoResultException e) {
-			log.fine("RR: EJB Invitation not found [" + idfr + "].");
-			//throw new RecordNotFoundException("Invitation not found: [" + idfr + "]");
-		} catch (NonUniqueResultException e) {
-			log.warning("RR: EJB More than one Invitation found with IDFR: [" + idfr + "].");
-			//throw new RecordErrorException("More than one Invitation found with IDFR: [" + idfr + "]");
-		} catch (PersistenceException e) {
-			log.warning("RR: EJB Persistence error while getting Invitation [" + idfr + "].");
-			//throw new SystemErrorException("Persistence error while getting Invitation [" + idfr + "].");
-		}
-		
-		return invitation;
-	}
-	
-	
 	//////////////////////////////////////////////////////
 	//// = Token Issuing & Verifying Functionality  = ////
 	//////////////////////////////////////////////////////
 
-	@Override
-	public BearerToken verifyUserCredentials(String username, String password) {
-		log.fine("RR: Verifying credentials for [" + username + "]");
-		
-		BearerToken token = null;
-		User user = getUser(username);
-		
-		SecuredPassword storedPassword = new SecuredPassword(user.getPassword(), user.getSalt(), user.getCounter());
-		SecuredPasswordVerifier verifier = new SecuredPasswordVerifier(storedPassword);
-		
-		if (verifier.verifyPassword(password)) {
-			
-			// Create a new token for this verified user
-			token = new BearerToken();
-			token.setAccessToken(createRandomIdfr(16));
-			token.setTokenType(TokenType.Bearer);
-			token.setExpiration(10 * 3600);   // JUDGE tokens have a life span of 10 hours (a day worth of a Regatta) -> TODO: use a function based on type of user or something...
-			token.setTimestamp(new Date());
-			token.setStatus(TokenLifeCycleStatus.ACTIVE);
-			token.setUser(user);
-			
-			em.persist(token);
-			log.fine("RR: User [" + user.getIdfr() + "] verified. Issuing token [" + token.getAccessToken() + "]");
-		}
-		
-		return token;
-	}
-	
-	
 	@Override
 	public BearerToken getToken(String idfr) {
 		log.fine("RR: Getting Token [" + idfr + "]");
@@ -250,6 +223,36 @@ public class AuthorizationManagerBean implements AuthorizationManager {
 	
 	
 	@Override
+	public BearerToken verifyUserCredentials(String username, String password) {
+		log.fine("RR: Verifying credentials for [" + username + "]");
+		
+		BearerToken token = null;
+
+		CredentialHandler credentialHandler = new JrrCredentialHandler();
+		User user = getUser(username);
+		if (credentialHandler.matches(password, user.getPassword())) {
+			
+			// Create a new token for this verified user
+			token = new BearerToken();
+			token.setAccessToken(createRandomIdfr(16));
+			token.setTokenType(TokenType.Bearer);
+			token.setExpiration(10 * 3600);   // TODO eg. JUDGE tokens have a life span of 10 hours (a day worth of a Regatta) -> Think!
+			token.setTimestamp(new Date());
+			token.setStatus(TokenLifeCycleStatus.ACTIVE);
+			token.setUser(user);
+			
+			em.persist(token);
+			log.fine("RR: User [" + user.getIdfr() + "] verified. Issuing token [" + token.getAccessToken() + "]");
+			
+		} else {
+			log.fine("Invalid credentials for user [" + user.getIdfr() + "]. Password mismatch.");
+		}
+			
+		return token;
+	}
+	
+	
+	@Override
 	public User verifyToken(String tokenIdfr) {
 		log.fine("RR: Verifying token...");
 		
@@ -272,7 +275,7 @@ public class AuthorizationManagerBean implements AuthorizationManager {
 		if (subject.contains("<") && subject.contains(">")) {
 			invitation.setEmail(subject.substring(subject.indexOf("<")+1, subject.indexOf(">")).trim());
 			if (subject.contains(",")) {
-				invitation.setLastName(subject.substring(0, subject.indexOf(",")).trim());
+				invitation.setLastname(subject.substring(0, subject.indexOf(",")).trim());
 				invitation.setName(subject.substring(subject.indexOf(",")+1, subject.indexOf("<")).trim());
 			} else {
 				invitation.setName(subject.substring(0, subject.indexOf("<")).trim());

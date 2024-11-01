@@ -27,6 +27,7 @@
 		<class>org.jrrevuelta.rr.model.User</class>
 		<class>org.jrrevuelta.rr.model.Invitation</class>
 		<class>org.jrrevuelta.rr.model.BearerToken</class>
+		<class>org.jrrevuelta.rr.model.Role</class>
 		
 	</persistence-unit>
 	

@@ -41,30 +41,27 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name="Invitation")
 @Access(AccessType.PROPERTY)
 @NamedQueries({
-	@NamedQuery(name="Invitation.all",
-			    query="SELECT i FROM Invitation i"),
-	@NamedQuery(name="Invitation.withIDFR",
-	            query="SELECT i FROM Invitation i WHERE i.idfr = :idfr")
+	@NamedQuery(name="Invitation.all", query="SELECT i FROM Invitation i"),
+	@NamedQuery(name="Invitation.withIDFR", query="SELECT i FROM Invitation i WHERE i.idfr = :idfr")
 })
 @XmlRootElement(name="invitation")
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class Invitation implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private static Logger log = Logger.getLogger("org.jrrevuelta.rr.service.model");
 	
 	private int id;
 	private String idfr;
 	private String name;
 	private String lastName;
 	private String email;
-	private UserRole role;
+
+	private Role.Roles role;
 	private User authority;   // TODO: link with inviting User (the authority) when enrollment and token issuing are complete (obtained from the Bearer Token)
 	private Date timestamp;
-	private InvitationLifeCycleStatus status;
+	private Status status;
 	
-	private static final long serialVersionUID = 1L;
-	private static Logger log = Logger.getLogger("org.jrrevuelta.rr.service.model");
-    
-	// Life-cycle status 
-	public enum InvitationLifeCycleStatus {
+	public enum Status {
 		CREATED,
 		EXPIRED,
 		DELETED,
@@ -73,24 +70,18 @@ public class Invitation implements Serializable {
 	
 	public Invitation() {
 		super();
-		log.finest("RR: Invitation (Core model bean - JAXB - JPA) instantiated.");
+		log.finest("RR: Invitation entity instantiated.");
 	}
 	
 	
 	/**
-	 * id: Property with the internal identity of this entity
+	 * id: PK - Internal identity of this entity
 	 */
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="Id")
 	@XmlAttribute
-	public int getId() {
-		return this.id;
-	}
-	
-	protected void setId(int id) {
-		this.id = id;
-	}
-	
+	public int getId() { return this.id; }
+	protected void setId(int id) { this.id = id; }
 	
 	/**
 	 * idfr: Property that uniquely identifies the invitation and is exposed to the user.
@@ -99,67 +90,42 @@ public class Invitation implements Serializable {
 	 */
 	@Column(name="IDFR")
 	@XmlElement(name="idfr")
-	public String getIdfr() {
-		return this.idfr;
-	}
-	
-	public void setIdfr(String idfr) {
-		this.idfr = idfr;
-	}
-	
+	public String getIdfr() { return this.idfr; }
+	public void setIdfr(String idfr) { this.idfr = idfr; }
 	
 	/**
 	 * name: Property that contains the proper name of the individual. 
 	 */
 	@Column(name="Name")
 	@XmlElement(name="name")
-	public String getName() {
-		return this.name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
+	public String getName() { return this.name; }
+	public void setName(String name) { this.name = name; }
 	
 	/**
 	 * lastName: Property that contains the family name or last-name of the individual. 
 	 */
 	@Column(name="lastName")
 	@XmlElement(name="lastName")
-	public String getLastName() {
-		return this.lastName;
-	}
-	
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	
+	public String getLastName() { return this.lastName; }
+	public void setLastName(String lastName) { this.lastName = lastName; }
 	
 	/**
 	 * email: Property that contains the email of the individual. 
 	 */
 	@Column(name="email")
 	@XmlElement(name="email")
-	public String getEmail() {
-		return this.email;
-	}
-	
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
+	public String getEmail() { return this.email; }
+	public void setEmail(String email) { this.email = email; }
 	
 	/**
 	 * role: Property that holds the designated role for the person to invite.
 	 */
 	@Column(name="Role")
 	@Enumerated(value=EnumType.STRING)
-	public UserRole getRole() {
+	public Role.Roles getRole() {
 		return this.role;
 	}
-	
-	public void setRole(UserRole role) {
+	public void setRole(Role.Roles role) {
 		this.role = role;
 	}
 	
@@ -203,11 +169,11 @@ public class Invitation implements Serializable {
 	@Column(name="LCStatus")
 	@Enumerated(value=EnumType.STRING)
 	@XmlElement(name="status")
-	public InvitationLifeCycleStatus getStatus() {
+	public Status getStatus() {
 		return this.status;
 	}
 	
-	public void setStatus(InvitationLifeCycleStatus status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 	

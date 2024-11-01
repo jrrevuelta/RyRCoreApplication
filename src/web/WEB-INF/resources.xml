@@ -44,7 +44,7 @@
           
           UserName: jrr-ryr-prod
           Region: EU-SOUTH-2
-          AccessKey: /AKIA2F5P2JEUOV3A6X2L/sDrLfKh67BWFba2AHzbcmKsY+lb7oCNr9JvjX9M3/
+          AccessKey:  /XXXXXXXXXXXXXXXXXXXX/YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY/
 
           Application user with permissions to access: SES, SNS, KMS
             

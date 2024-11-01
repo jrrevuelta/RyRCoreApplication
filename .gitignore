@@ -5,4 +5,5 @@
 /.settings/
 /build/
 /dist/
+/src/sql/*.bak
 /src/web/WEB-INF/lib/
